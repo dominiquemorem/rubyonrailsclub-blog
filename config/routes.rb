@@ -10,5 +10,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "welcome#index"
 
+  # devise_for :admins do
+  # get '/admins/sign_out' => 'devise/sessions#destroy'
+  # end
+
   get "/inicio", to: "welcome#index"
 end

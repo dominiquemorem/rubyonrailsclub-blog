@@ -38,5 +38,7 @@ module RubyonrailsclubBlog
     config.generators.system_tests = nil
     # I18n
     config.i18n.default_locale = :"pt-BR"
+    # Active Storage
+    config.active_storage.variant_processor = :mini_magick
   end
 end

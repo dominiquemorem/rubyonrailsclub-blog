@@ -5,6 +5,8 @@ module Administrate
     before_action :authenticate_admin!
     before_action :set_article, only: [:show, :edit, :update, :destroy]
 
+    layout "administrate"
+
     # GET /articles or /articles.json
     def index
       @articles = Article.all
@@ -26,10 +28,11 @@ module Administrate
     # POST /articles or /articles.json
     def create
       @article = Article.new(article_params)
+      @article.cover_image.attach(article_params[:cover_image])
 
       respond_to do |format|
         if @article.save
-          format.html { redirect_to(@article, notice: "Article was successfully created.") }
+          format.html { redirect_to(administrate_article_url(@article), notice: "Article was successfully created.") }
           format.json { render(:show, status: :created, location: @article) }
         else
           format.html { render(:new, status: :unprocessable_entity) }
@@ -42,7 +45,7 @@ module Administrate
     def update
       respond_to do |format|
         if @article.update(article_params)
-          format.html { redirect_to(@article, notice: "Article was successfully updated.") }
+          format.html { redirect_to(administrate_article_url(@article), notice: "Article was successfully updated.") }
           format.json { render(:show, status: :ok, location: @article) }
         else
           format.html { render(:edit, status: :unprocessable_entity) }
@@ -56,7 +59,7 @@ module Administrate
       @article.destroy!
 
       respond_to do |format|
-        format.html { redirect_to(articles_path, status: :see_other, notice: "Article was successfully destroyed.") }
+        format.html { redirect_to(administrate_article_url, status: :see_other, notice: "Article was successfully destroyed.") }
         format.json { head(:no_content) }
       end
     end
@@ -70,7 +73,7 @@ module Administrate
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :body)
+      params.require(:article).permit(:title, :body, :cover_image)
     end
   end
 end

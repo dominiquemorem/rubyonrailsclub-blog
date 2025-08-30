@@ -399,6 +399,7 @@ DEPENDENCIES
   rubocop-rails (~> 2.12, >= 2.12.4)
   rubocop-shopify (~> 2.3)
   sass-rails (>= 6)
+  sassc-rails
   solargraph
   tty-spinner
   turbolinks (~> 5)
